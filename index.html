@@ -1,79 +1,137 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="ja"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Mapionmaps-for-android-sample : " />
+	<title></title>
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+	<meta name="viewport" content="width=device-width">
 
-    <title>Mapionmaps-for-android-sample</title>
-  </head>
+	<!--<link rel="stylesheet/less" href="less/style.less">
+	<script src="js/libs/less-1.2.1.min.js"></script>-->
+	<link rel="stylesheet" href="less/style.css">
+	
+	<!-- Use SimpLESS (Win/Linux/Mac) or LESS.app (Mac) to compile your .less files
+	to style.css, and replace the 2 lines above by this one:
 
-  <body>
+	<link rel="stylesheet/less" href="less/style.css">
+	 -->
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/mapion/MapionMaps-for-Android-Sample">View on GitHub</a>
+	<script src="js/libs/modernizr-2.5.3-respond-1.1.0.min.js"></script>
+</head>
+<body>
+<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 
-          <h1 id="project_title">Mapionmaps-for-android-sample</h1>
-          <h2 id="project_tagline"></h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/mapion/MapionMaps-for-Android-Sample/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/mapion/MapionMaps-for-Android-Sample/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="index.html">Mapion Android Maps API</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="index.html">Home</a></li>
+              <li><a href="document.html">ドキュメント</a></li>
+              <li><a href="apikey.html">APIキー</a></li>
+              <li><a href="download.html">ダウンロード</a></li>
+              <li><a href="sample.html">サンプル</a></li>
+              <li><a href="kiyaku.html">利用規約</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+	<div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <!--Sidebar content-->
+          <div class="well">
+            <h4><a href="document.html">ドキュメント</a></h4>
+            <ul>
+              <li><a href="document.html#prepare">準備</a></li>
+              <li><a href="document.html#map">地図を表示する</a></li>
+              <li><a href="document.html#listener">リスナー</a></li>
+              <li><a href="document.html#zoomcontrol">縮尺変更ボタンを表示する</a></li>
+              <li><a href="document.html#image">画像を描画する</a></li>
+              <li><a href="document.html#circle">サークルを描画する</a></li>
+              <li><a href="document.html#line">ラインを描画する</a></li>
+              <li><a href="document.html#polygon">ポリゴンを描画する</a></li>
+              <li><a href="document.html#tileratio">地図タイルの大きさを変える</a></li>
+              <li><a href="document.html#osm">OpenStreetMapを表示する</a></li>
+              <li><a href="document.html#gsi">国土地理院の地図を表示する</a></li>
+              <li><a href="document.html#original">独自画像を表示する</a></li>
+            </ul>
+            <h4><a href="apikey.html">APIキー</a></h4>
+            <h4><a href="download.html">ダウンロード</a></h4>
+            <h4><a href="sample.html">サンプル</a></h4>
+            <h4><a href="kiyaku.html">利用規約</a></h4>
+            <br />
+            <div class="social"> <!-- Twitter -->
+              <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-url="http://mapion.github.io/MapionMaps-for-Android-Sample/" data-text="Mapion Android Maps API" data-via="honjo2">Tweet</a>
+            </div> <!-- /Twitter -->
+            <div class="social"> <!-- Facebook -->
+              <div id="fb-root"></div>
+              <div class="fb-like" data-href="http://mapion.github.io/MapionMaps-for-Android-Sample/" data-layout="button_count" data-send="false" data-width="120" data-show-faces="false"></div>
+            </div> <!-- /Facebook -->
+            <div class="social"> <!-- Google plusone -->
+              <div class="g-plusone" data-size="medium" data-href="http://mapion.github.io/MapionMaps-for-Android-Sample/"></div>
+            </div> <!-- /Google plusone -->
+            <div class="social"> <!-- Hatena -->
+              <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+	data-hatena-bookmark-layout="standard"
+	data-hatena-bookmark-url="http://mapion.github.io/MapionMaps-for-Android-Sample/">
+	            <img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none">
+              </a>
+            </div> <!-- /Hatena -->
+          </div>
+        </div>
+        <div class="span9">
+          <!--Body content-->
+          <div class="well">
+            <p>Mapion Android Maps APIは、Androidネイティブアプリケーションに於いて、マピオンの地図を表示するためのライブラリです。Android 2.3以上のバージョンでお使いいただけます。<a href="download.html">ダウンロード</a>からjarファイルをダウンロードし、プロジェクトに追加してください。そして<a href="apikey.html">APIキー</a>からAPIキーを取得し、プログラム中に記述します。詳細は<a href="document.html">ドキュメント</a>をご覧ください。また、<a href="sample.html">サンプル</a>をGitHubに上げていますので参考としてください。</p>
+            <p><b>Mapion Android Maps API（Androidネイティブアプリケーション向け地図ライブラリ）を商用サイト・イントラネットで使用されたい場合は、<a href="https://www.mapion.co.jp/sales/inquiry/">マピオン法人向けサービス担当</a>までお問い合わせ下さい。</b></p>
+          </div>
+        </div>
+      </div>
+      
+      <hr>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Mapionmaps-for-android-sample maintained by <a href="https://github.com/mapion">mapion</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer>
+        <p>&copy; <a href="http://www.mapion.co.jp/">Mapion</a> Co.,Ltd. All rights reserved.</p>
       </footer>
-    </div>
+    </div> <!-- /container-fluid -->
 
-    
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
 
-  </body>
+<script src="js/libs/bootstrap/transition.js"></script>
+<script src="js/libs/bootstrap/collapse.js"></script>
+
+<script src="js/script.js"></script>
+<script>
+(function(w,d){
+    w._gaq=[["_setAccount","UA-29986121-2"],["_trackPageview"]];
+    w.___gcfg={lang:"ja"};
+    var c,e=d.createDocumentFragment(),f=d.getElementsByTagName("script")[0],
+    a=function(a,b){if(!d.getElementById(b)){c=d.createElement("script");c.src=a;c.id=b||null;c.async=true;e.appendChild(c);}};
+    a(("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js");
+    a("https://apis.google.com/js/plusone.js");
+    a("//b.st-hatena.com/js/bookmark_button_wo_al.js");
+    a("//platform.twitter.com/widgets.js");
+    a("//connect.facebook.net/ja_JP/all.js#xfbml=1","facebook-jssdk");
+    f.parentNode.insertBefore(e,f);
+})(this,document);
+</script>
+
+</body>
 </html>

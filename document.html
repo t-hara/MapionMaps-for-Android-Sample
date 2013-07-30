@@ -1,0 +1,970 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="ja"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title></title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<meta name="viewport" content="width=device-width">
+
+	<!--<link rel="stylesheet/less" href="less/style.less">
+	<script src="js/libs/less-1.2.1.min.js"></script>-->
+	<link rel="stylesheet" href="less/style.css">
+	<link rel="stylesheet" href="css/prettify.css" />
+	
+	<!-- Use SimpLESS (Win/Linux/Mac) or LESS.app (Mac) to compile your .less files
+	to style.css, and replace the 2 lines above by this one:
+
+	<link rel="stylesheet/less" href="less/style.css">
+	 -->
+
+	<script src="js/libs/modernizr-2.5.3-respond-1.1.0.min.js"></script>
+</head>
+<body>
+<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="index.html">Mapion Android Maps API</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li><a href="index.html">Home</a></li>
+              <li class="active"><a href="document.html">ドキュメント</a></li>
+              <li><a href="apikey.html">APIキー</a></li>
+              <li><a href="download.html">ダウンロード</a></li>
+              <li><a href="sample.html">サンプル</a></li>
+              <li><a href="kiyaku.html">利用規約</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+	<div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <!--Sidebar content-->
+          <div class="well">
+            <h4><a href="document.html">ドキュメント</a></h4>
+            <ul>
+              <li><a href="document.html#prepare">準備</a></li>
+              <li><a href="document.html#map">地図を表示する</a></li>
+              <li><a href="document.html#listener">リスナー</a></li>
+              <li><a href="document.html#zoomcontrol">縮尺変更ボタンを表示する</a></li>
+              <li><a href="document.html#image">画像を描画する</a></li>
+              <li><a href="document.html#circle">サークルを描画する</a></li>
+              <li><a href="document.html#line">ラインを描画する</a></li>
+              <li><a href="document.html#polygon">ポリゴンを描画する</a></li>
+              <li><a href="document.html#tileratio">地図タイルの大きさを変える</a></li>
+              <li><a href="document.html#osm">OpenStreetMapを表示する</a></li>
+              <li><a href="document.html#gsi">国土地理院の地図を表示する</a></li>
+              <li><a href="document.html#original">独自画像を表示する</a></li>
+            </ul>
+            <h4><a href="apikey.html">APIキー</a></h4>
+            <h4><a href="download.html">ダウンロード</a></h4>
+            <h4><a href="sample.html">サンプル</a></h4>
+            <h4><a href="kiyaku.html">利用規約</a></h4>
+            <br />
+            <div class="social"> <!-- Twitter -->
+              <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-url="http://mapion.github.io/MapionMaps-for-Android-Sample/" data-text="Mapion Android Maps API" data-via="honjo2">Tweet</a>
+            </div> <!-- /Twitter -->
+            <div class="social"> <!-- Facebook -->
+              <div id="fb-root"></div>
+              <div class="fb-like" data-href="http://mapion.github.io/MapionMaps-for-Android-Sample/" data-layout="button_count" data-send="false" data-width="120" data-show-faces="false"></div>
+            </div> <!-- /Facebook -->
+            <div class="social"> <!-- Google plusone -->
+              <div class="g-plusone" data-size="medium" data-href="http://mapion.github.io/MapionMaps-for-Android-Sample/"></div>
+            </div> <!-- /Google plusone -->
+            <div class="social"> <!-- Hatena -->
+              <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+	data-hatena-bookmark-layout="standard"
+	data-hatena-bookmark-url="http://mapion.github.io/MapionMaps-for-Android-Sample/">
+	            <img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none">
+              </a>
+            </div> <!-- /Hatena -->
+          </div>
+        </div>
+        <div class="span9">
+          <!--Body content-->
+          <div class="well">
+            <h3><a name="prepare"></a>準備</h3>
+            <ol>
+              <li><a href="apikey.html">APIキー</a>からAPIキーを取得する</li>
+              <li><a href="download.html">ダウンロード</a>からjarをダウンロードしプロジェクトのlibsフォルダに入れる</li>
+              <li><a href="https://code.google.com/p/concurrentlinkedhashmap/">ConcurrentLinkedHashMap</a>をダウンロードしプロジェクトのlibsフォルダに入れる</li>
+              <li>AndroidManifest.xmlに&lt;uses-permission android:name="android.permission.INTERNET" /&gt;を追記する</li>
+            </ol>
+            
+            <hr />
+            
+            <h3><a name="map"></a>地図を表示する</h3>
+<pre class="prettyprint">
+@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    MapView mapView = new MapView(this, "APIキー");
+    // MapView mapView = new MapView(this, "APIキー", new MapionMap3D()); // 3D風地図を表示したい場合
+    // mapView.setLoadingBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.loading)); // loading画像を指定する場合
+
+    mapView.setZoom(17.f);
+    mapView.setCenter(new GeoPoint(35.301667, 139.283333));
+    // mapView.animateCenter(new GeoPoint(35.301667, 139.283333)); // アニメーションさせる場合
+    
+    // mapView.setMap(new MapionMap3D()); // 地図を切り替えたい場合
+
+    setContentView(mapView);
+}
+</pre>
+            <img src="img/map.png" width="320" height="480">
+
+            <hr />
+            
+            <h3><a name="listener"></a>リスナー</h3>
+            <h4>MoveendListener</h4>
+<pre class="prettyprint">
+MoveendListener moveendListener = new MoveendListener() {
+    @Override
+    public void moveend(MapView mapView) {
+        // moveendの処理を書く
+    }
+};
+mapView.getMoveendListeners().add(moveendListener);
+</pre>
+            
+            <hr />
+            
+            <h3><a name="zoomcontrol"></a>縮尺変更ボタンを表示する</h3>
+<pre class="prettyprint">
+import jp.co.mapion.android.maps.MapView;
+import jp.co.mapion.android.maps.Overlay;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Point;
+import android.view.MotionEvent;
+
+public class ZoomUpOverlay extends Overlay {
+
+    private Context context;
+	
+    private Bitmap currentButton;
+    private Bitmap normal;
+    private Bitmap disabled;
+    private Bitmap pressed;
+	
+    private Point before = new Point();
+	
+    public ZoomUpOverlay(Context context) {
+        this.context = context;
+        normal = BitmapFactory.decodeResource(
+        		context.getResources(), R.drawable.btn_zoom_up_normal);
+        disabled = BitmapFactory.decodeResource(
+        		context.getResources(), R.drawable.btn_zoom_up_disabled);
+        pressed = BitmapFactory.decodeResource(
+        		context.getResources(), R.drawable.btn_zoom_up_pressed);
+        currentButton = normal;
+    }
+	
+    @Override
+    public void draw(Canvas canvas, MapView mapView) {
+        int viewWidth = mapView.getWidth();
+        int viewHeight = mapView.getHeight();
+        int bitmapWidth = currentButton.getWidth();
+        int bitmapHeight = currentButton.getHeight();
+        int marginright = 5;
+        int marginbottom = 0;
+        
+        canvas.restore();
+        Bitmap button = mapView.getZoom() ==
+        	  mapView.getMaxZoom() ?
+        			  disabled : currentButton;
+        
+        int x = viewWidth - bitmapWidth - marginright;
+        int y = viewHeight - bitmapHeight - marginbottom;
+        canvas.drawBitmap(button, x, y, null);
+        canvas.save();
+  	}
+  	
+    @Override
+    public boolean onTouchEvent(MotionEvent e, MapView mapView) {
+        Point p = new Point((int) e.getX(), (int) e.getY());
+        if (inside(p, mapView)) {
+            switch (e.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                before = p;
+                currentButton = pressed;
+                return false;
+            case MotionEvent.ACTION_UP:
+                currentButton = normal;
+                if (distance(p) &lt; 20) {
+                    zoom(mapView);
+                }
+                return true;
+            case MotionEvent.ACTION_MOVE:
+                return false;
+            case MotionEvent.ACTION_CANCEL:
+                return false;
+            }
+        } else {
+            switch (e.getAction()) {
+            case MotionEvent.ACTION_UP:
+                currentButton = normal;
+                break;
+            }
+        }
+        return false;
+    }
+  	
+    private boolean inside(Point p, MapView mapView) {
+        Bitmap btnZoomUp = BitmapFactory.decodeResource(
+        	    context.getResources(), R.drawable.btn_zoom_up_normal);
+        if (btnZoomUp == null) {
+            return false;
+        }
+        
+        int viewWidth = mapView.getWidth();
+        int viewHeight = mapView.getHeight();
+        int bitmapWidth = btnZoomUp.getWidth();
+        int bitmapHeight = btnZoomUp.getHeight();
+        
+        int minx = viewWidth - bitmapWidth;
+        int maxx = viewWidth;
+        int miny = viewHeight - bitmapHeight;
+        int maxy = viewHeight;
+        if (p.x >= minx && p.x &lt;= maxx && p.y &gt;= miny && p.y &lt;= maxy) {
+            return true;
+        }
+        return false;
+    }
+  	
+    private int distance(Point after) {
+        int x = Math.abs(before.x - after.x);
+        int y = Math.abs(before.y - after.y);
+        return x + y;
+    }
+  	
+    private void zoom(MapView mapView) {
+        mapView.zoomIn();
+    }
+  	
+    @Override
+    public String toString() {
+        return getClass().getName();
+    }
+}
+</pre>
+
+<pre class="prettyprint">
+import jp.co.mapion.android.maps.MapView;
+import jp.co.mapion.android.maps.Overlay;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Point;
+import android.view.MotionEvent;
+
+public class ZoomDownOverlay extends Overlay {
+
+    private Context context;
+    
+    private Bitmap currentButton;
+    private Bitmap normal;
+    private Bitmap disabled;
+    private Bitmap pressed;
+    
+    private Point before = new Point();
+  	
+    public ZoomDownOverlay(Context context) {
+        this.context = context;
+        normal = BitmapFactory.decodeResource(
+        	  context.getResources(), R.drawable.btn_zoom_down_normal);
+        disabled = BitmapFactory.decodeResource(
+        	  context.getResources(), R.drawable.btn_zoom_down_disabled);
+        pressed = BitmapFactory.decodeResource(
+          	context.getResources(), R.drawable.btn_zoom_down_pressed);
+        currentButton = normal;
+    }
+	
+    @Override
+    public void draw(Canvas canvas, MapView mapView) {
+        int viewWidth = mapView.getWidth();
+        int viewHeight = mapView.getHeight();
+        int bitmapWidth = currentButton.getWidth();
+        int bitmapHeight = currentButton.getHeight();
+        int marginright = 5;
+        int marginbottom = 0;
+        
+        canvas.restore();
+        Bitmap button = mapView.getZoom() == mapView.getMinZoom() ?
+        		disabled : currentButton;
+        
+        int x = viewWidth - bitmapWidth * 2 - marginright;
+        int y = viewHeight - bitmapHeight - marginbottom;
+        canvas.drawBitmap(button, x, y, null);
+        canvas.save();
+    }
+	
+    @Override
+    public boolean onTouchEvent(MotionEvent e, MapView mapView) {
+        Point p = new Point((int) e.getX(), (int) e.getY());
+        if (inside(p, mapView)) {
+            switch (e.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                before = p;
+                currentButton = pressed;
+                return false;
+            case MotionEvent.ACTION_UP:
+                currentButton = normal;
+                if (distance(p) &lt; 20) {
+                    zoom(mapView);
+                }
+                return true;
+            case MotionEvent.ACTION_MOVE:
+                return false;
+            case MotionEvent.ACTION_CANCEL:
+                return false;
+            }
+        } else {
+            switch (e.getAction()) {
+            case MotionEvent.ACTION_UP:
+                currentButton = normal;
+                break;
+            }
+        }
+        return false;
+    }
+		
+    private boolean inside(Point p, MapView mapView) {
+        Bitmap btnZoomDown = BitmapFactory.decodeResource(
+        	  context.getResources(), R.drawable.btn_zoom_down_normal);
+        if (btnZoomDown == null) {
+            return false;
+        }
+        
+        int viewWidth = mapView.getWidth();
+        int viewHeight = mapView.getHeight();
+        int bitmapWidth = btnZoomDown.getWidth();
+        int bitmapHeight = btnZoomDown.getHeight();
+        
+        int minx = viewWidth - bitmapWidth * 2;
+        int maxx = viewWidth - bitmapWidth;
+        int miny = viewHeight - bitmapHeight;
+        int maxy = viewHeight;
+        if (p.x &gt;= minx && p.x &lt;= maxx && p.y &gt;= miny && p.y &lt;= maxy) {
+            return true;
+        }
+        return false;
+    }
+	
+    private int distance(Point after) {
+        int x = Math.abs(before.x - after.x);
+        int y = Math.abs(before.y - after.y);
+        return x + y;
+    }
+	
+    private void zoom(MapView mapView) {
+        mapView.zoomOut();
+    }
+	
+    @Override
+    public String toString() {
+        return getClass().getName();
+    }
+}
+</pre>
+
+<pre class="prettyprint">
+@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+        
+    MapView mapView = new MapView(this, "APIキー");
+    
+    mapView.setZoom(17.f);
+    mapView.setCenter(new GeoPoint(35.301667, 139.283333));
+    
+    mapView.getOverlays().add(new ZoomUpOverlay(this));
+    mapView.getOverlays().add(new ZoomDownOverlay(this));
+    
+    setContentView(mapView);
+}
+</pre>
+          <img src="img/zoomcontrol.png" width="360" height="640">
+          
+          <hr />
+          
+          <h3><a name="image"></a>画像を描画する</h3>
+<pre class="prettyprint">
+@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    MapView mapView = new MapView(this, "APIキー");
+    
+    mapView.setZoom(17.f);
+    mapView.setCenter(new GeoPoint(35.301667, 139.283333));
+    
+    Overlay kokodeneOverlay = new Overlay() {
+        private Bitmap kokodene = BitmapFactory.decodeResource(getResources(), R.drawable.kokodene);
+        @Override
+        public void draw(Canvas canvas, MapView mapView) {
+            Point pixel = mapView.geoToPixel(MapView.LONGBEACH);
+            canvas.drawBitmap(kokodene, pixel.x, pixel.y - 13, null);   
+        }
+    };
+    mapView.getOverlays().add(kokodeneOverlay);
+    
+    setContentView(mapView);
+}
+</pre>				
+           <img src="img/image.png" width="360" height="640">
+            
+           <hr />
+            
+            <h3><a name="circle"></a>サークルを描画する</h3>
+<pre class="prettyprint">
+@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    
+    MapView mapView = new MapView(this, "APIキー");
+    
+    mapView.setZoom(17.f);
+    mapView.setCenter(new GeoPoint(35.301667, 139.283333));
+    
+    Overlay circle = new Overlay() {
+        @Override
+        public void draw(Canvas canvas, MapView mapView) {
+            double latRadians = mapView.getCenter().lat * Math.PI / 180;
+            float pixel = (float) (100.f / Math.cos(latRadians) / mapView.getMetersPerPixel());
+            
+            Point pos = mapView.geoToPixel(MapView.LONGBEACH);
+            
+            Paint fillPaint = new Paint();
+            fillPaint.setColor(Color.argb(30, 0, 0, 255));
+            fillPaint.setAntiAlias(true);
+            fillPaint.setStyle(Paint.Style.FILL);
+            
+            canvas.drawCircle(pos.x, pos.y, pixel, fillPaint);
+            
+            Paint strokePaint = new Paint();
+            strokePaint.setColor(Color.argb(100, 0, 0, 255));
+            strokePaint.setAntiAlias(true);
+            strokePaint.setStrokeWidth(3);
+            strokePaint.setStyle(Paint.Style.STROKE);
+            
+            canvas.drawCircle(pos.x, pos.y, pixel, strokePaint);
+        }
+    };
+    mapView.getOverlays().add(circle);
+    
+    setContentView(mapView);
+}
+</pre>         
+            <img src="img/circle.png" width="360" height="640">
+            
+            <hr />
+            
+            <h3><a name="line"></a>ラインを描画する</h3>
+<pre class="prettyprint">
+@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    
+    Mapview mapView = new MapView(this, "APIキー");
+    
+    mapView.setZoom(17.f);
+    mapView.setCenter(new GeoPoint(35.301667, 139.283333));
+    
+    Overlay line = new Overlay() {
+        private GeoPoint one = new GeoPoint(35.301667, 139.283333);
+        private GeoPoint two = new GeoPoint(35.304667, 139.286333);
+        private GeoPoint three = new GeoPoint(35.305667, 139.281333);
+        @Override
+        public void draw(Canvas canvas, MapView mapView) {
+            Point onePoint = mapView.geoToPixel(one);
+            Point twoPoint = mapView.geoToPixel(two);
+            Point threePoint = mapView.geoToPixel(three);
+            
+            Paint paint = new Paint();
+            paint.setAntiAlias(true);
+            
+            paint.setStrokeWidth(8);
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setColor(Color.argb(150, 255, 0, 255));
+            canvas.drawLines(new float[]{onePoint.x, onePoint.y, twoPoint.x, twoPoint.y, twoPoint.x, twoPoint.y, threePoint.x, threePoint.y}, paint);
+        }
+    };
+    mapView.getOverlays().add(line);
+    
+    setContentView(mapView);
+}
+</pre>         
+            <img src="img/line.png" width="360" height="640">
+            
+            <hr />
+            
+            <h3><a name="polygon"></a>ポリゴンを描画する</h3>
+<pre class="prettyprint">
+@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    
+    MapView mapView = new MapView(this, "APIキー");
+    
+    mapView.setZoom(17.f);
+    mapView.setCenter(new GeoPoint(35.301667, 139.283333));
+    
+    Overlay polygon = new Overlay() {
+        private GeoPoint one = new GeoPoint(35.301667, 139.283333);
+        private GeoPoint two = new GeoPoint(35.304667, 139.286333);
+        private GeoPoint three = new GeoPoint(35.305667, 139.281333);
+        @Override
+        public void draw(Canvas canvas, MapView mapView) {
+            
+            Point onePoint = mapView.geoToPixel(one);
+            Point twoPoint = mapView.geoToPixel(two);
+            Point threePoint = mapView.geoToPixel(three);
+            
+            Paint paint = new Paint();
+            paint.setAntiAlias(true);
+            paint.setColor(Color.argb(120, 0, 0, 255));
+            paint.setStyle(Paint.Style.FILL_AND_STROKE);
+            Path path = new Path();
+            
+            path.moveTo(onePoint.x, onePoint.y);
+            path.lineTo(twoPoint.x, twoPoint.y);
+            path.lineTo(threePoint.x, threePoint.y);
+            path.lineTo(onePoint.x, onePoint.y);
+            canvas.drawPath(path, paint);
+        }
+    };
+    mapView.getOverlays().add(polygon);
+    
+    setContentView(mapView);
+}
+</pre>         
+            <img src="img/polygon.png" width="360" height="640">
+            
+            <hr />
+            
+            <h3><a name="tileratio"></a>地図タイルの大きさを変える</h3>
+<pre class="prettyprint">
+public class MainActivity extends Activity {
+        
+    private class NewMap extends MapionMap {
+        @Override
+        public double getTileCoe() {
+            // デフォルトは256〜512だけどこれで180〜360になる
+            return 0.5;
+        }
+    }
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        
+        MapView mapView = new MapView(this, "APIキー", new NewMap());
+        
+        mapView.setZoom(17.f);
+        mapView.setCenter(new GeoPoint(35.301667, 139.283333));
+        
+        setContentView(mapView);
+    }
+}
+</pre>         
+            <img src="img/tileratio.png" width="360" height="640">
+            
+            <hr />
+            
+            <h3><a name="osm"></a>OpenStreetMapを表示する</h3>
+<pre class="prettyprint">
+import android.graphics.Bitmap;
+import jp.co.mapion.android.maps.EPSG3857Map;
+import jp.co.mapion.android.maps.Tile;
+
+public class OpenStreetMap extends EPSG3857Map {
+
+    @Override
+    public Bitmap bitmapForTile(Tile tile) {
+        
+        // Webからタイルを取得する場合はここでnullを返してurlForTileでURLを返す
+        // 逆にローカルのタイルを使用する場合はurlForTileでnullを返してここでBitmapを返す
+        return null;
+    }
+    
+    @Override
+    public float getMinZoom() {
+        
+        return 0.f;
+    }
+    
+    @Override
+    public float getMaxZoom() {
+        
+        return 18.f;
+    }
+    
+    @Override
+    public String getName() {
+        return "OSM";
+    }
+    
+    @Override
+    public String getCopyright() {
+        return "Map data © OpenStreetMap contributors, CC BY-SA";
+    }
+    
+    @Override
+    public String urlForTile(Tile tile) {
+        
+        String ret = "http://tile.openstreetmap.org/" + tile.z + "/" + tile.x + "/" + tile.y + ".png";
+        return ret;
+    }
+}
+</pre>
+
+<pre class="prettyprint">
+@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    
+    Mapview mapView = new MapView(this, "APIキー", new OpenStreetMap());
+    
+    mapView.setZoom(17.f);
+    mapView.setCenter(new GeoPoint(35.301667, 139.283333));
+    
+    setContentView(mapView);
+}
+</pre>         
+            <img src="img/osm.png" width="360" height="640">
+            
+            <hr />
+            
+            <h3><a name="gsi"></a><a href="http://portal.cyberjapan.jp/portalsite/version/v4/">国土地理院</a>の地図を表示する</h3>
+            <h4>国土地理院の地図データを使用するには国土地理院の許諾が必要です（<a href="http://portal.cyberjapan.jp/portalsite/kiyaku/kyodaku.html">許諾を得るための申請要領等について</a>）</h4>
+<pre class="prettyprint">
+import jp.co.mapion.android.maps.EPSG3857Map;
+import jp.co.mapion.android.maps.Tile;
+import android.graphics.Bitmap;
+
+public class GSIMap extends EPSG3857Map {
+
+    @Override
+    public Bitmap bitmapForTile(Tile tile) {
+        
+        return null;
+    }
+    
+    @Override
+    public float getMinZoom() {
+        
+        return 6.f;
+    }
+    
+    @Override
+    public float getMaxZoom() {
+        
+        return 18.f;
+    }
+        
+    @Override
+    public String getName() {
+        return "GSI";
+    }
+    
+    @Override
+    public String getCopyright() {
+        return "国土地理院";
+    }
+    
+    @Override
+    public String urlForTile(Tile tile) {
+        
+        String did;
+        switch (tile.z) {
+        case 6:
+        case 7:
+        case 8:
+            did = "JAIS";
+            break;
+        case 9:
+        case 10:
+        case 11:
+            did = "BAFD1000K";
+            break;
+        case 12:
+        case 13:
+        case 14:
+            did = "BAFD200K";
+            break;
+        case 15:
+        case 16:
+        case 17:
+            did = "DJBMM";
+            break;
+        case 18:
+            did = "FGD";
+            break;
+        default:
+            did = "";
+            break;
+        }
+      
+        String xstr = String.format("%1$07d", tile.x);
+        String ystr = String.format("%1$07d", tile.y);
+        String path = getPath(xstr, ystr);
+
+        String ret = "http://cyberjapandata.gsi.go.jp/sqras/all/" + did + "/latest/" + tile.z + path + "/" + xstr + ystr + ".png";
+        return ret;
+    }
+    
+    private String getPath(String x, String y) {
+        StringBuilder dir = new StringBuilder();
+        for (int i = 0; i &lt; 6; i++) {
+            String xi = x.substring(i, i + 1);
+            String yi = y.substring(i, i + 1);
+            dir.append('/').append(xi).append(yi);
+        }
+        return dir.toString();
+    }
+}
+</pre>
+
+<pre class="prettyprint">
+@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    
+    Mapview mapView = new MapView(this, "APIキー", new GSIMap());
+    
+    mapView.setZoom(14.f);
+    mapView.setCenter(new GeoPoint(35.301667, 139.283333));
+    
+    setContentView(mapView);
+}
+</pre>         
+            <img src="img/gsi.png" width="360" height="640">
+            
+            <hr />
+            
+            <h3><a name="original"></a>独自画像を表示する</h3>
+            <h4>ローカルやWEBにある独自画像を表示することが可能です。独自画像にピンを立てたりラインを引くことも可能です。例として以下の画像（mapiontown.jpeg）をタイル化してAPIで表示させる場合を示します。</h4>
+<img src="img/mapiontown.jpeg" width="1280" height="1024"><br /><br />
+						<h5>タイル化手順</h5>
+						<ol>
+							<li>
+							  <a href="http://www.bartlett.ucl.ac.uk/casa/latest/software/gmap-image-cutter">GMap Image Cutter</a>をダウンロード＆インストール	
+							</li>
+							<li>
+								GMap Image Cutterを起動する<br />
+								<img src="img/gic01.png" width="611" height="475">
+							</li>
+							<li>
+							  mapiontown.pngを開く<br />
+							  <img src="img/gic02.png" width="664" height="536">
+							</li>
+							<li>
+								Createを押す<br />
+								<img src="img/gic03.png" width="611" height="475">
+							</li>
+							<li>
+								mapiontown-tilesとmapiontown.htmlが出来上がる（必要なのはmapiontown-tiles内のタイルです）<br />
+								<img src="img/gic04.png" width="675" height="369">
+							</li>
+							<li>
+								drawable-nodpiにタイルをコピーする<br />
+								<img src="img/gic05.png" width="210" height="320">
+							</li>
+						</ol>
+						
+						<h5>MapionTownMapクラス作成</h5>
+<pre class="prettyprint">
+import jp.co.mapion.android.maps.GeoPoint;
+import jp.co.mapion.android.maps.Map;
+import jp.co.mapion.android.maps.ProjectedPoint;
+import jp.co.mapion.android.maps.ProjectedRect;
+import jp.co.mapion.android.maps.Tile;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+public class MapionTown implements Map {
+    
+    private Context mContext;
+    
+    public MapionTown(Context context) {
+        mContext = context;
+    }
+
+    @Override
+    public Bitmap bitmapForTile(Tile tile) {
+        String fileName = tileToFileName(tile);
+        int resourceId = getResourceId(fileName);
+        Bitmap ret = BitmapFactory.decodeResource(mContext.getResources(), resourceId);
+        return ret;
+    }
+    
+    @Override
+    public GeoPoint projectedPointToGeo(ProjectedPoint projectedPoint) {
+        return new GeoPoint(projectedPoint.y, projectedPoint.x);
+    }
+    
+    @Override
+    public ProjectedPoint geoToProjectedPoint(GeoPoint geo) {
+        return new ProjectedPoint(geo.lng, geo.lat);
+    }
+    
+    @Override
+    public float getMinZoom() {
+        return 0;
+    }
+    
+    @Override
+    public float getMaxZoom() {
+        return 3;
+    }
+    
+    @Override
+    public int getTileLength() {
+        return 256;
+    }
+    
+    @Override
+    public ProjectedRect getProjectedRect() {
+        return new ProjectedRect(-256, -256, 256 * 2, 256 * 2);
+    }
+    
+    @Override
+    public String getName() {
+        return "MapionTown";
+    }
+    
+    @Override
+    public String getCopyright() {
+        return "© Mapion";
+    }
+    
+    @Override
+    public String urlForTile(Tile tile) {
+        return null;
+    }
+    
+    // タイルのサイズの変化幅を調整する
+    // 0   だと 256〜512
+    // 0.5 だと 180〜360
+    // 1   だと 128〜256
+    @Override
+    public double getTileCoe() {
+        return 0;
+    }
+    
+    private String tileToFileName(Tile tile) {
+        double p = Math.pow(2.0, tile.z);
+        int x = tile.x;
+        int y = tile.y;
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append('t');
+        for (int i = 0; i &lt; tile.z; i++) {
+            p = p / 2;
+            if (y &lt; p) {
+                if (x &lt; p) {
+                    sb.append('q');
+                } else {
+                    sb.append('r');
+                    x -= p;
+                }
+            } else {
+                if (x &lt; p) {
+                    sb.append('t');
+                    y -= p;
+                } else {
+                    sb.append('s');
+                    x -= p;
+                    y -= p;
+                }
+            }
+        }
+        
+        return sb.toString();
+    }
+    
+    private int getResourceId(String name) {
+        return mContext.getResources().getIdentifier(name, "drawable", getClass().getPackage().getName());
+    }
+}
+</pre>					
+						<h5>使い方</h5>
+<pre class="prettyprint">
+@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    requestWindowFeature(Window.FEATURE_NO_TITLE);
+    
+    MapView mapView = new MapView(this, ("APIキー"), new MapionTown(this));
+    
+    mapView.setZoom(1);
+    mapView.setCenter(new GeoPoint(0, 0));
+    
+    setContentView(mapView);
+}
+</pre>
+
+            
+            <hr />
+            
+            
+          </div>
+        </div>
+      </div>
+      
+      <hr>
+
+      <footer>
+        <p>&copy; <a href="http://www.mapion.co.jp/">Mapion</a> Co.,Ltd. All rights reserved.</p>
+      </footer>
+    </div> <!-- /container-fluid -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+
+<script src="js/libs/bootstrap/transition.js"></script>
+<script src="js/libs/bootstrap/collapse.js"></script>
+
+<script src="js/script.js"></script>
+
+<script src="js/prettify.js"></script>
+<script>prettyPrint();</script>
+<script>
+(function(w,d){
+    w._gaq=[["_setAccount","UA-29986121-2"],["_trackPageview"]];
+    w.___gcfg={lang:"ja"};
+    var c,e=d.createDocumentFragment(),f=d.getElementsByTagName("script")[0],
+    a=function(a,b){if(!d.getElementById(b)){c=d.createElement("script");c.src=a;c.id=b||null;c.async=true;e.appendChild(c);}};
+    a(("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js");
+    a("https://apis.google.com/js/plusone.js");
+    a("//b.st-hatena.com/js/bookmark_button_wo_al.js");
+    a("//platform.twitter.com/widgets.js");
+    a("//connect.facebook.net/ja_JP/all.js#xfbml=1","facebook-jssdk");
+    f.parentNode.insertBefore(e,f);
+})(this,document);
+</script>
+
+</body>
+</html>
