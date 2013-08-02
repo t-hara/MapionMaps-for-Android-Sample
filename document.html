@@ -450,8 +450,7 @@ public void onCreate(Bundle savedInstanceState) {
     Overlay circle = new Overlay() {
         @Override
         public void draw(Canvas canvas, MapView mapView) {
-            double latRadians = mapView.getCenter().lat * Math.PI / 180;
-            float pixel = (float) (100.f / Math.cos(latRadians) / mapView.getMetersPerPixel());
+            float pixel = mapView.metersToEquatorPixels(100);
             
             Point pos = mapView.geoToPixel(MapView.LONGBEACH);
             
