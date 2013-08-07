@@ -72,6 +72,7 @@
               <li><a href="document.html#gsi">国土地理院の地図を表示する</a></li>
               <li><a href="document.html#original">独自画像を表示する</a></li>
               <li><a href="document.html#rotate">回転する</a></li>
+              <li><a href="document.html#touch">タッチイベントを設定する</a></li>
             </ul>
             <h4><a href="apikey.html">APIキー</a></h4>
             <h4><a href="download.html">ダウンロード</a></h4>
@@ -915,7 +916,6 @@ public class MapionTown implements Map {
 @Override
 public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    requestWindowFeature(Window.FEATURE_NO_TITLE);
     
     MapView mapView = new MapView(this, ("APIキー"), new MapionTown(this));
     
@@ -947,6 +947,72 @@ public void onCreate(Bundle savedInstanceState) {
 </pre>
             <img src="img/rotate.png" width="320" height="480">
 
+            <hr />
+            
+            <h3><a name="touch"></a>タッチイベントを設定する</h3>
+<pre class="prettyprint">
+import jp.co.mapion.android.maps.MapView;
+import jp.co.mapion.android.maps.Overlay;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Canvas;
+import android.support.v4.view.GestureDetectorCompat;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+
+public class TouchEventOverlay extends Overlay {
+    
+    private Context mContext;
+    private GestureDetectorCompat mGestureDetector;
+    
+    public TouchEventOverlay(Context context) {
+        mContext = context;
+        mGestureDetector = new GestureDetectorCompat(context, mGestureListener);
+    }
+    
+    @Override
+    public boolean onTouchEvent(MotionEvent e, MapView mapView) {
+        return mGestureDetector.onTouchEvent(e);
+    }
+    
+    @Override
+    public void draw(Canvas canvas, MapView mapView) {
+
+    }
+
+    private final GestureDetector.SimpleOnGestureListener mGestureListener
+            = new GestureDetector.SimpleOnGestureListener() {  
+        @Override
+        public void onLongPress(MotionEvent e) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
+            dialog.setTitle("長押ししました。");
+            dialog.setNegativeButton("閉じる", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+            dialog.show();
+        }
+    };
+}
+</pre>
+<pre class="prettyprint">
+@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    
+    MapView mapView = new MapView(this, "APIキー");
+    
+    mapView.setZoom(17);
+    mapView.setCenter(new GeoPoint(35.301667, 139.283333));
+    
+    mapView.getOverlays().add(new TouchEventOverlay(this));
+    
+    setContentView(mapView);
+}
+</pre>
             
             <hr />
             
