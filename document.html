@@ -1045,7 +1045,12 @@ public class OpenWeatherMap extends EPSG3857Map {
     
     @Override
     public String getName() {
-        return "OpenWeatherMap";
+        // 10分毎にキャッシュをクリアするためにsuffixを付ける
+        Calendar now = Calendar.getInstance();
+        int minute = now.get(Calendar.MINUTE);
+        int floorMinute = (int) Math.floor(minute * 0.1);
+        
+        return "OpenWeatherMap" + floorMinute;
     }
     
     @Override
