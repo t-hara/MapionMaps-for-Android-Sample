@@ -1,3 +1,9 @@
+### 3.9 (2013.09.05)
+
+* ScaleGestureDetector#getCurrentSpanXがAPI level 11であったためAPI level 9対応のgetCurrentSpanを使うように変更した
+* moveendの発動条件を変更した
+* MapUtilにwgsToTky, tkyToWgsを追加した
+
 ### 3.8.1 (2013.08.30)
 
 * 3D風地図のコピーライト修正
