@@ -1,3 +1,7 @@
+### 3.9.1 (2013.09.06)
+
+* 別Activityから地図Activityに戻ってきた時、端末によってエラーとなる問題の対応
+
 ### 3.9 (2013.09.05)
 
 * ScaleGestureDetector#getCurrentSpanXがAPI level 11であったためAPI level 9対応のgetCurrentSpanを使うように変更した
