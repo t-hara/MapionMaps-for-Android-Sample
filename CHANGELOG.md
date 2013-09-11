@@ -1,3 +1,8 @@
+### 3.10 (2013.09.11)
+
+* GeoPointをSerializableにした
+* GeoPointOptimクラス追加
+
 ### 3.9.2 (2013.09.10)
 
 * metersToEquatorPixelsの引数に何を入れても同じ値しか返さないバグを修正
