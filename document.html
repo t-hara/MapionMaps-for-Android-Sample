@@ -148,6 +148,16 @@ MoveendListener moveendListener = new MoveendListener() {
 };
 mapView.getMoveendListeners().add(moveendListener);
 </pre>
+            <h4>ZoomendListener</h4>
+<pre class="prettyprint">
+ZoomendListener zoomendListener = new ZoomendListener() {
+    @Override
+    public void zoomend(MapView mapView) {
+        // zoomendの処理を書く
+    }
+};
+mapView.getZoomendListeners().add(zoomendListener);
+</pre>
             
             <hr />
             

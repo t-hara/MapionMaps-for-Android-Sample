@@ -1,3 +1,7 @@
+### 3.11 (2013.09.12)
+
+* ZoomendListenerを追加した
+
 ### 3.10 (2013.09.11)
 
 * GeoPointをSerializableにした
