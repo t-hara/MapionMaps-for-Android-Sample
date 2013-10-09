@@ -74,7 +74,8 @@
               <li><a href="document.html#rotate">回転する</a></li>
               <li><a href="document.html#touch">タッチイベントを設定する</a></li>
               <li><a href="document.html#layer">レイヤを追加する</a></li>
-              <li><a href="document.html#cache">ファイルキャッシュの上限を設定する</a></li>
+              <li><a href="document.html#memorycache">メモリーキャッシュの上限を設定する</a></li>
+              <li><a href="document.html#diskcache">ディスクキャッシュの上限を設定する</a></li>
               <li><a href="document.html#cacheclear">キャッシュをクリアする</a></li>
             </ul>
             <h4><a href="apikey.html">APIキー</a></h4>
@@ -1095,10 +1096,17 @@ public void onCreate(Bundle savedInstanceState) {
             
             <hr />
             
-            <h3><a name="cache"></a>ファイルキャッシュの上限を設定する</h3>
-            <h4>これを設定するとスクロールが若干重くなります</h4>
+            <h3><a name="memorycache"></a>メモリーキャッシュの上限を設定する</h3>
 <pre class="prettyprint">
-mapView.setCacheCapacity(100); // デフォルトは0
+mapView.setMemoryCacheCapacity(256); // デフォルトは128
+</pre>      
+            
+            <hr />
+            
+            <h3><a name="diskcache"></a>ディスクキャッシュの上限を設定する</h3>
+            <h4><font color="red">これを設定するとスクロールが重くなります</font></h4>
+<pre class="prettyprint">
+mapView.setDiskCacheCapacity(100); // デフォルトは0
 </pre>          
             
             <hr />
