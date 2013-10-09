@@ -1,3 +1,9 @@
+### 3.12 (2013.10.09)
+
+* ピンチイン・ピンチアウトでいっぱいまでピンチしてもきっちりmaxZoom, minZoomにならなかった問題の対応
+* スクロール中にズームチェンジするとnomapになる問題の対応
+* setCacheCapacityメソッドを削除しgetMemoryCacheCapacity, setMemoryCachaCapacity, getDiskCacheCapacity, setDiskCacheCapacityを追加
+
 ### 3.11.4 (2013.10.08)
 
 * 標準地図から3D地図に切り替えると地図タイルが混じってしまう問題の対応
