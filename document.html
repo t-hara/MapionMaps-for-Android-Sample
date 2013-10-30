@@ -128,6 +128,7 @@ public void onCreate(Bundle savedInstanceState) {
     mapView.setZoom(17.f);
     mapView.setCenter(new GeoPoint(35.301667, 139.283333));
     // mapView.animateCenter(new GeoPoint(35.301667, 139.283333)); // アニメーションさせる場合
+    // mapView.animateCenter(new GeoPoint(35.301667, 139.283333), MapView.DEFAULT_ANIMATE_ZOOM_INTERVAL - 2); // アニメーションのスピードを速くする場合
     
     // mapView.setMap(new MapionMap3D()); // 地図を切り替えたい場合
 
@@ -274,7 +275,7 @@ public class ZoomUpOverlay extends Overlay {
     }
   	
     private void zoom(MapView mapView) {
-        mapView.zoomIn();
+        mapView.animateZoom(mapView.getZoom() + 1);
     }
   	
     @Override
@@ -394,7 +395,7 @@ public class ZoomDownOverlay extends Overlay {
     }
 	
     private void zoom(MapView mapView) {
-        mapView.zoomOut();
+        mapView.animateZoom(mapView.getZoom() - 1);
     }
 	
     @Override
