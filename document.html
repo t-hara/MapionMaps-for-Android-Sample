@@ -126,6 +126,8 @@ public void onCreate(Bundle savedInstanceState) {
     // mapView.setLoadingBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.loading)); // loading画像を指定する場合
 
     mapView.setZoom(17.f);
+    // mapView.animateZoom(17.f); // アニメーションさせる場合
+    // mapView.animateZoom(17.f, MapView.DEFAULT_ANIMATE_ZOOM_INTERVAL - 3, MapView.DEFAULT_ANIMATE_ZOOM_STEPS + 0.07f); // アニメーションのスピードを調整する場合。これは速くする例
     mapView.setCenter(new GeoPoint(35.301667, 139.283333));
     // mapView.animateCenter(new GeoPoint(35.301667, 139.283333)); // アニメーションさせる場合
     // mapView.animateCenter(new GeoPoint(35.301667, 139.283333), MapView.DEFAULT_ANIMATE_ZOOM_INTERVAL - 2); // アニメーションのスピードを速くする場合
