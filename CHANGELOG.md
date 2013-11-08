@@ -1,3 +1,11 @@
+### 3.16 (2013.11.08)
+
+* タイルリクエストの最大スレッド数を動的に設定するようにした
+* setMemoryCacheCapacityでneedsTileCountより小さい値は設定できないようにした
+* getNeedsTileCountメソッド追加
+* setCenterの前にanimateZoomするとその後のsetCenterが利かなくなる問題の対応
+* surfaceDestroyedでメモリキャッシュをクリアするようにした
+
 ### 3.15 (2013.11.07)
 
 * アニメーションズームのズームスピードをさらに細かく設定できるようにした
