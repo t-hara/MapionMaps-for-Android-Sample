@@ -539,7 +539,7 @@ public void onCreate(Bundle savedInstanceState) {
             <h4>ルートを描画したい場合</h4>
             <h5>ポイントの多いルートは毎回全てのポイントの位置を計算する処理は重いため以下のように工夫する必要があります</h5>
 <pre class="prettyprint">
-class RouteOverlay extends Overlay {
+public class RouteOverlay extends Overlay {
         
     private float lineWidth;
     
@@ -690,6 +690,69 @@ public void onCreate(Bundle savedInstanceState) {
 }
 </pre>         
             <img src="img/polygon.png" width="360" height="640">
+            
+            <br /><br />
+            <h4>複雑なポリゴンを描画したい場合</h4>
+            <h5>頂点の多いポリゴンは毎回全ての頂点の位置を計算する処理は重いためルート描画と同様以下のように工夫する必要があります</h5>
+<pre class="prettyprint">
+public class PolygonOverlay extends Overlay {
+        
+    private GeoPoint baseGeoPoint;
+    private float baseZoom;
+    
+    private Paint paint = new Paint();
+    private Path path = new Path();
+    
+    public PolygonOverlay(MapView mapView, ArrayList&lt;GeoPoint&gt; coordinates) {
+        
+        Point centerPoint = mapView.geoToPixel(mapView.getCenter());
+        centerPoint.x -= mapView.getWidth() / 2;
+        centerPoint.y -= mapView.getHeight() / 2;
+        baseGeoPoint = mapView.pixelToGeo(centerPoint);
+        
+        baseZoom = mapView.getZoom();
+        
+        paint.setAntiAlias(true);
+        paint.setColor(Color.argb(120, 255, 0, 0));
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        
+        for (int i = 0, size = coordinates.size(); i < size; i++) {
+            Point point = mapView.geoToPixel(coordinates.get(i));
+            if (i == 0) {
+                path.moveTo(point.x, point.y);
+            } else {
+                path.lineTo(point.x, point.y);
+            }
+        }
+    }
+    
+    @Override
+    public void draw(Canvas canvas, MapView mapView) {
+        
+        float zoom = mapView.getZoom();
+        float nextZoom = zoom - baseZoom;
+        float scale = (float) Math.pow(2, nextZoom);
+
+        Point point = mapView.geoToPixel(baseGeoPoint);
+        canvas.scale(scale, scale, point.x, point.y);
+        canvas.translate(point.x, point.y);
+        canvas.drawPath(path, paint);
+    }
+}
+</pre>
+<pre class="prettyprint">
+ArrayList&lt;GeoPoint&gt; coordinates = new ArrayList&lt;GeoPoint&gt;();
+coordinates.add(new GeoPoint(35.301533,139.27926));
+coordinates.add(new GeoPoint(35.301664,139.279389));
+coordinates.add(new GeoPoint(35.301822,139.279925));
+coordinates.add(new GeoPoint(35.302343,139.279914));
+coordinates.add(new GeoPoint(35.302912,139.279893));
+coordinates.add(new GeoPoint(35.302662,139.278182));
+PolygonOverlay polygonOverlay = new PolygonOverlay(mapView, coordinates);
+mapView.getOverlays().add(polygonOverlay);
+</pre>
+
+            <img src="img/polygon2.png" width="360" height="640">
             
             <hr />
             
