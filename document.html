@@ -549,7 +549,7 @@ class RouteOverlay extends Overlay {
     private Paint paint = new Paint();
     private Path path = new Path();
     
-    public RouteOverlay(MapView mapView, ArrayList<GeoPoint> coordinates, float lineWidth) {
+    public RouteOverlay(MapView mapView, ArrayList&lt;GeoPoint&gt; coordinates, float lineWidth) {
         
         this.lineWidth = lineWidth;
         
@@ -590,7 +590,7 @@ class RouteOverlay extends Overlay {
 }
 </pre>
 <pre class="prettyprint">
-ArrayList<GeoPoint> coordinates = new ArrayList<GeoPoint>();
+ArrayList&lt;GeoPoint&gt; coordinates = new ArrayList&lt;GeoPoint&gt;();
 coordinates.add(new GeoPoint(35.301533,139.27926));
 coordinates.add(new GeoPoint(35.301664,139.279389));
 coordinates.add(new GeoPoint(35.301822,139.279925));
