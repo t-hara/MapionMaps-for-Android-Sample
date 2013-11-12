@@ -535,6 +535,117 @@ public void onCreate(Bundle savedInstanceState) {
 </pre>         
             <img src="img/line.png" width="360" height="640">
             
+            <br /><br />
+            <h4>ルートを描画したい場合</h4>
+            <h5>ポイントの多いルートは毎回全てのポイントの位置を計算する処理は重いため以下のように工夫する必要があります</h5>
+<pre class="prettyprint">
+class RouteOverlay extends Overlay {
+        
+    private float lineWidth;
+    
+    private GeoPoint baseGeoPoint;
+    private float baseZoom;
+    
+    private Paint paint = new Paint();
+    private Path path = new Path();
+    
+    public RouteOverlay(MapView mapView, ArrayList<GeoPoint> coordinates, float lineWidth) {
+        
+        this.lineWidth = lineWidth;
+        
+        Point centerPoint = mapView.geoToPixel(mapView.getCenter());
+        centerPoint.x -= mapView.getWidth() / 2;
+        centerPoint.y -= mapView.getHeight() / 2;
+        baseGeoPoint = mapView.pixelToGeo(centerPoint);
+        
+        baseZoom = mapView.getZoom();
+        
+        paint.setColor(Color.RED);
+        paint.setStyle(Paint.Style.STROKE);
+        
+        for (int i = 0, size = coordinates.size(); i < size; i++) {
+            Point point = mapView.geoToPixel(coordinates.get(i));
+            if (i == 0) {
+                path.moveTo(point.x, point.y);
+            } else {
+                path.lineTo(point.x, point.y);
+            }
+        }
+    }
+    
+    @Override
+    public void draw(Canvas canvas, MapView mapView) {
+        
+        float zoom = mapView.getZoom();
+        float nextZoom = zoom - baseZoom;
+        float scale = (float) Math.pow(2, nextZoom);
+        
+        paint.setStrokeWidth(lineWidth / scale);
+
+        Point point = mapView.geoToPixel(baseGeoPoint);
+        canvas.scale(scale, scale, point.x, point.y);
+        canvas.translate(point.x, point.y);
+        canvas.drawPath(path, paint);
+    }
+}
+</pre>
+<pre class="prettyprint">
+ArrayList<GeoPoint> coordinates = new ArrayList<GeoPoint>();
+coordinates.add(new GeoPoint(35.301533,139.27926));
+coordinates.add(new GeoPoint(35.301664,139.279389));
+coordinates.add(new GeoPoint(35.301822,139.279925));
+coordinates.add(new GeoPoint(35.302343,139.279914));
+coordinates.add(new GeoPoint(35.302912,139.279893));
+coordinates.add(new GeoPoint(35.302662,139.278182));
+coordinates.add(new GeoPoint(35.303152,139.278117));
+coordinates.add(new GeoPoint(35.303419,139.279861));
+coordinates.add(new GeoPoint(35.303914,139.279866));
+coordinates.add(new GeoPoint(35.303831,139.27911));
+coordinates.add(new GeoPoint(35.304444,139.279088));
+coordinates.add(new GeoPoint(35.304409,139.277447));
+coordinates.add(new GeoPoint(35.305556,139.277398));
+coordinates.add(new GeoPoint(35.306694,139.277484));
+coordinates.add(new GeoPoint(35.306987,139.277516));
+coordinates.add(new GeoPoint(35.306983,139.276921));
+coordinates.add(new GeoPoint(35.307066,139.276336));
+coordinates.add(new GeoPoint(35.307701,139.27639));
+coordinates.add(new GeoPoint(35.308143,139.276476));
+coordinates.add(new GeoPoint(35.308568,139.276658));
+coordinates.add(new GeoPoint(35.308502,139.276926));
+coordinates.add(new GeoPoint(35.308432,139.277597));
+coordinates.add(new GeoPoint(35.309019,139.277565));
+coordinates.add(new GeoPoint(35.309929,139.277441));
+coordinates.add(new GeoPoint(35.310494,139.277575));
+coordinates.add(new GeoPoint(35.31056,139.277034));
+coordinates.add(new GeoPoint(35.310568,139.276384));
+coordinates.add(new GeoPoint(35.311383,139.276427));
+coordinates.add(new GeoPoint(35.311369,139.276663));
+coordinates.add(new GeoPoint(35.312044,139.276894));
+coordinates.add(new GeoPoint(35.31203,139.278037));
+coordinates.add(new GeoPoint(35.312687,139.278042));
+coordinates.add(new GeoPoint(35.314635,139.277747));
+coordinates.add(new GeoPoint(35.314871,139.280338));
+coordinates.add(new GeoPoint(35.314547,139.280853));
+coordinates.add(new GeoPoint(35.313908,139.281025));
+coordinates.add(new GeoPoint(35.311746,139.281143));
+coordinates.add(new GeoPoint(35.31161,139.28117));
+coordinates.add(new GeoPoint(35.311277,139.281347));
+coordinates.add(new GeoPoint(35.3108,139.281438));
+coordinates.add(new GeoPoint(35.310564,139.281422));
+coordinates.add(new GeoPoint(35.309688,139.281111));
+coordinates.add(new GeoPoint(35.308283,139.280628));
+coordinates.add(new GeoPoint(35.307097,139.280279));
+coordinates.add(new GeoPoint(35.306585,139.280874));
+coordinates.add(new GeoPoint(35.306331,139.281245));
+coordinates.add(new GeoPoint(35.306068,139.2811));
+coordinates.add(new GeoPoint(35.306024,139.281003));
+coordinates.add(new GeoPoint(35.305963,139.280478));
+coordinates.add(new GeoPoint(35.30588,139.2797));
+RouteOverlay route = new RouteOverlay(mapView, coordinates, 8.f);
+mapView.getOverlays().add(route);
+</pre>
+            
+            
             <hr />
             
             <h3><a name="polygon"></a>ポリゴンを描画する</h3>
