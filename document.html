@@ -1158,6 +1158,9 @@ public class TouchEventOverlay extends Overlay {
     private Context mContext;
     private GestureDetectorCompat mGestureDetector;
     
+    private MapView mMapView;
+    private float mZoom;
+    
     public TouchEventOverlay(Context context) {
         mContext = context;
         mGestureDetector = new GestureDetectorCompat(context, mGestureListener);
@@ -1165,6 +1168,8 @@ public class TouchEventOverlay extends Overlay {
     
     @Override
     public boolean onTouchEvent(MotionEvent e, MapView mapView) {
+        mMapView = mapView;
+        mZoom = mapView.getZoom();
         return mGestureDetector.onTouchEvent(e);
     }
     
@@ -1177,6 +1182,7 @@ public class TouchEventOverlay extends Overlay {
             = new GestureDetector.SimpleOnGestureListener() {  
         @Override
         public void onLongPress(MotionEvent e) {
+            if (mMapView.getZoom() != mZoom) return;
             AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
             dialog.setTitle("長押ししました。");
             dialog.setNegativeButton("閉じる", new DialogInterface.OnClickListener() {
