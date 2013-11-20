@@ -452,6 +452,75 @@ public void onCreate(Bundle savedInstanceState) {
 }
 </pre>				
            <img src="img/image.png" width="360" height="640">
+           
+           <br /><br />
+            <h4>多数の画像を描画したい場合</h4>
+            <h5>描画のたびに緯度経度をピクセルに変換するのは重いので以下のようにピクセルを行列で変換するやり方があります</h5>
+<pre class="prettyprint">
+public class ClusterOverlay extends Overlay {
+        
+    Bitmap mIcon;
+    float[] mPoints;
+    float[] mDstPoints;
+  
+    GeoPoint baseGeoPoint;
+    float baseZoom;
+        
+    Matrix matrix = new Matrix();
+      
+    public ClusterOverlay(MapView mapView, ArrayList&lt;GeoPoint&gt; geoPoints, Bitmap icon) {
+          
+        mPoints = new float[geoPoints.size() * 2];
+        mDstPoints = new float[mPoints.length];
+          
+        for (int i = 0, offset = 0, size = geoPoints.size(); i &lt; size; i++) {
+            Point point = mapView.geoToPixel(geoPoints.get(i));
+            mPoints[offset++] = point.x;
+            mPoints[offset++] = point.y;
+        }
+          
+        mIcon = icon;
+          
+        Point centerPoint = mapView.geoToPixel(mapView.getCenter());
+        centerPoint.x -= mapView.getWidth() / 2;
+        centerPoint.y -= mapView.getHeight() / 2;
+        baseGeoPoint = mapView.pixelToGeo(centerPoint);
+          
+        baseZoom = mapView.getZoom();
+    }
+      
+    @Override
+    public void draw(Canvas canvas, MapView mapView) {
+          
+        float zoom = mapView.getZoom();
+        float nextZoom = zoom - baseZoom;
+        float scale = (float) Math.pow(2, nextZoom);
+          
+        Point point = mapView.geoToPixel(baseGeoPoint);
+          
+        matrix.reset();
+        matrix.preScale(scale, scale, point.x, point.y);
+        matrix.preTranslate(point.x, point.y);
+        matrix.mapPoints(mDstPoints, mPoints);
+          
+        for (int i = 0; i &lt; mPoints.length; i++) {
+            if (i % 2 == 1) {
+                canvas.drawBitmap(mIcon, mDstPoints[i-1] - mIcon.getWidth()/2, mDstPoints[i] - mIcon.getHeight()/2, null);
+            }
+        }        
+    }
+}
+</pre>
+<pre class="prettyprint">
+ArrayList<GeoPoint> geoPoints = new ArrayList<GeoPoint>();
+geoPoints.add(MapView.LONGBEACH);
+geoPoints.add(new GeoPoint(35.303667, 139.285333));
+        
+Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.cancel_circle);
+        
+ClusterOverlay cluster = new ClusterOverlay(mapView, geoPoints, icon);
+mapView.getOverlays().add(cluster);
+</pre>
             
            <hr />
             
