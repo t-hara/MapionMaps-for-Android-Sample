@@ -505,9 +505,21 @@ public class ClusterOverlay extends Overlay {
           
         for (int i = 0; i &lt; mPoints.length; i++) {
             if (i % 2 == 1) {
-                canvas.drawBitmap(mIcon, mDstPoints[i-1] - mIcon.getWidth()/2, mDstPoints[i] - mIcon.getHeight()/2, null);
+                float x = mDstPoints[i-1] - mIcon.getWidth() / 2;
+                float y = mDstPoints[i] - mIcon.getHeight() / 2;
+                if (inside(mapView, x, y)) {
+                    canvas.drawBitmap(mIcon, x, y, null);
+                }
             }
         }        
+    }
+    
+    private boolean inside(MapView mapView, float x, float y) {
+        if (x < 0 - mIcon.getWidth()) return false;
+        if (y < 0 - mIcon.getHeight()) return false;
+        if (x > mapView.getWidth()) return false;
+        if (y > mapView.getHeight()) return false;
+        return true;
     }
 }
 </pre>
