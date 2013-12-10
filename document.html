@@ -67,7 +67,7 @@
               <li><a href="document.html#circle">サークルを描画する</a></li>
               <li><a href="document.html#line">ラインを描画する</a></li>
               <li><a href="document.html#polygon">ポリゴンを描画する</a></li>
-              <li><a href="document.html#tileratio">地図タイルの大きさを変える</a></li>
+              <li><a href="document.html#tileratio">地図タイルの大きさ（tile range）を変える</a></li>
               <li><a href="document.html#osm">OpenStreetMapを表示する</a></li>
               <li><a href="document.html#gsi">国土地理院の地図を表示する</a></li>
               <li><a href="document.html#original">独自画像を表示する</a></li>
@@ -833,29 +833,26 @@ mapView.getOverlays().add(polygonOverlay);
             
             <hr />
             
-            <h3><a name="tileratio"></a>地図タイルの大きさを変える</h3>
+            <h3><a name="tileratio"></a>地図タイルの大きさ（tile range）を変える</h3>
 <pre class="prettyprint">
-public class MainActivity extends Activity {
-        
-    private class NewMap extends MapionMap {
-        @Override
-        public double getTileCoe() {
-            // デフォルトは256〜512だけどこれで180〜360になる
-            return 0.5;
-        }
-    }
+@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
     
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        
-        MapView mapView = new MapView(this, "APIキー", new NewMap());
-        
-        mapView.setZoom(17.f);
-        mapView.setCenter(new GeoPoint(35.301667, 139.283333));
-        
-        setContentView(mapView);
-    }
+    MapView mapView = new MapView(this, "APIキー", new NewMap());
+    
+    // タイルのサイズの変化幅を調整する係数
+    // 0 〜 1まで設定できる
+    // このように明示的に設定しない場合、端末の画面情報を見て自動で決まる
+    // 1   だと 256〜512
+    // 0.5 だと 180〜360
+    // 0   だと 128〜256
+    mapView.setTileCoe(0.5f);
+    
+    mapView.setZoom(17.f);
+    mapView.setCenter(new GeoPoint(35.301667, 139.283333));
+    
+    setContentView(mapView);
 }
 </pre>         
             <img src="img/tileratio.png" width="360" height="640">
