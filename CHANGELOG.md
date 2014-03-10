@@ -1,3 +1,7 @@
+### 3.21.6 (2014.03.10)
+
+* OutOfMemoryError対策
+
 ### 3.21.5 (2014.03.10)
 
 * setConstrainRect()のバグ修正
