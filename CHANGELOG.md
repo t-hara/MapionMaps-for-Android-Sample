@@ -1,3 +1,7 @@
+### 3.21.7 (2014.03.12)
+
+* Surface has already been released 対策
+
 ### 3.21.6 (2014.03.10)
 
 * OutOfMemoryError対策
